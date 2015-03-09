@@ -1,0 +1,30 @@
+{
+  "name": "conire",
+  "version": "1.0.0",
+  "description": "conditional require of modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab -c -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anandkumarpatel/conire.git"
+  },
+  "keywords": [
+    "conditional",
+    "require",
+    "modules",
+    "engine",
+    "drivers"
+  ],
+  "author": "anandkumarpatel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anandkumarpatel/conire/issues"
+  },
+  "homepage": "https://github.com/anandkumarpatel/conire",
+  "devDependencies": {
+    "code": "^1.3.0",
+    "lab": "^5.4.0"
+  }
+}

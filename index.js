@@ -17,10 +17,7 @@ module.exports = function(key, modules, fallback) {
   // if key is in modules, return required
   if (modules[key]) {
     var item = modules[key];
-    // if relative path, patch
-    if (/\.?\.\//.test(modules[key])) {
-      item = path.resolve(path.dirname(module.parent.filename), item);
-    }
+    item = patchIfPath(modules[key]);
 
     return require(item);
   }
@@ -58,8 +55,23 @@ function getFallback (fallback) {
   }
   // if string, return required module
   if (typeof fallback === 'string') {
+    fallback = patchIfPath(fallback);
+
     return require(fallback);
   }
   // if anything else, return what was passed
   return fallback;
+}
+
+ /**
+  * if input is a relative path, patch it with correct location
+  * @param  {string} item string of module to require
+  * @return {string}      patched relative path, or unchanged input
+  */
+function patchIfPath (item) {
+  if (/\.?\.\//.test(item)) {
+    return path.resolve(path.dirname(module.parent.filename), item);
+  }
+
+  return item;
 }

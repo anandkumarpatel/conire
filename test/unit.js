@@ -60,6 +60,12 @@ describe('conair', function () {
       done();
     });
 
+    it('should resolve relative fallback', function(done) {
+      var test = conair('fake', {}, './fixtures/three.js');
+      expect(test()).to.equal(3);
+      done();
+    });
+
     it('should return null if key does not exist and no fallback', function(done) {
       var test = conair('fake', {
         test1: './fixtures/one.js',
@@ -70,6 +76,7 @@ describe('conair', function () {
       done();
     });
   });
+
   describe('incorrect usage', function () {
     [{}, [], null, undefined, {a:1}, '', false, true].forEach(function(testKey) {
       it('should error if invalid key '+testKey, function(done) {

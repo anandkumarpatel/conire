@@ -78,7 +78,7 @@ describe('conair', function () {
 
     [null, undefined, '', false].forEach(function(testKey) {
       it('should should return fallback if key is falsy: '+testKey, function(done) {
-        var test = conair('fake', {}, 123456);
+        var test = conair(testKey, {}, 123456);
         expect(test).to.equal(123456);
         done();
       });

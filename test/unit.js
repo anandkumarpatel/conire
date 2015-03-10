@@ -75,11 +75,20 @@ describe('conair', function () {
       expect(test).to.equal(null);
       done();
     });
+
+    [null, undefined, '', false].forEach(function(testKey) {
+      it('should should return fallback if key is falsy: '+testKey, function(done) {
+        var test = conair(testKey, {}, 123456);
+        expect(test).to.equal(123456);
+        done();
+      });
+    });
+
   });
 
   describe('incorrect usage', function () {
-    [{}, [], null, undefined, {a:1}, '', false, true].forEach(function(testKey) {
-      it('should error if invalid key '+testKey, function(done) {
+    [{}, [], {a:1}, true].forEach(function(testKey) {
+      it('should error if invalid key: '+testKey, function(done) {
         try {
           conair(testKey, {});
         } catch (err) {
@@ -89,7 +98,7 @@ describe('conair', function () {
       });
     });
     [[], null, undefined, '', false, true, 'fake'].forEach(function(testModule) {
-      it('should error if invalid modulelist '+testModule, function(done) {
+      it('should error if invalid modulelist: '+testModule, function(done) {
         try {
           conair('test', testModule);
         } catch (err) {

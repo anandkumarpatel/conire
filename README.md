@@ -5,6 +5,8 @@ conditional require of modules
 ```
 var conire = require('conire')
 // key used to find which module to require
+// if key is falsy, fallback will be set
+// if key is not falsy, it must be a string
 var key = process.env.NODE_ENV;
 
 // object containing module to be required

@@ -3,7 +3,7 @@ var path = require('path');
 
 /**
  * return required module based on key
- * @param  {string} key     key used for lookup
+ * @param  {string} key     key used for lookup. if falsy fallback is returned
  * @param  {object} modules contains options to be required.
  *                          key is lookup key, value is module to be required
  * @param  {mixed} key      if key not found, this is required and returned if string
@@ -15,14 +15,14 @@ module.exports = function(key, modules, fallback) {
   // validate inputs
   validate(key, modules);
   // if key is in modules, return required
-  if (modules[key]) {
+  if (key && modules[key]) {
     var item = modules[key];
     item = patchIfPath(modules[key]);
 
     return require(item);
   }
 
-  // key not found, return fallback
+  // key not found or is false, return fallback
   return getFallback(fallback);
 };
 
@@ -33,8 +33,9 @@ module.exports = function(key, modules, fallback) {
  * @param  {[type]} modules should be object (not arrary)
  */
 function validate (key, modules) {
-  if (typeof key !== 'string' || key.length <= 0) {
-    throw new Error('key should be a non-empty string');
+  // if key exist, it must be a string
+  if (key && typeof key !== 'string') {
+    throw new Error('key should be a string');
   }
 
   if (typeof modules !== 'object' || Array.isArray(modules)) {

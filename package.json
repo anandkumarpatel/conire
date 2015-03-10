@@ -1,6 +1,6 @@
 {
   "name": "conire",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "conditional require of modules",
   "main": "index.js",
   "scripts": {
